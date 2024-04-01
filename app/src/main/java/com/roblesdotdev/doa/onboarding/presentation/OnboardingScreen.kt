@@ -2,12 +2,13 @@ package com.roblesdotdev.doa.onboarding.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.roblesdotdev.doa.R
 import com.roblesdotdev.doa.onboarding.presentation.components.OnboardingPager
 
 @Composable
 fun OnboardingScreen(
-    viewModel: OnboardingViewModel,
+    viewModel: OnboardingViewModel = hiltViewModel(),
     onFinish: () -> Unit
 ) {
     LaunchedEffect(key1 = viewModel.hasSeenOnboarding) {

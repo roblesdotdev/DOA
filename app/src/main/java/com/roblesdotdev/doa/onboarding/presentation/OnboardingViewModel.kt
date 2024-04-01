@@ -6,8 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.roblesdotdev.doa.onboarding.domain.usecase.CompleteOnboardingUseCase
 import com.roblesdotdev.doa.onboarding.domain.usecase.HasSeenOnboardingUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class OnboardingViewModel(
+@HiltViewModel
+class OnboardingViewModel @Inject constructor(
     hasSeenOnboardingUseCase: HasSeenOnboardingUseCase,
     private val completeOnboardingUseCase: CompleteOnboardingUseCase,
 ) : ViewModel() {

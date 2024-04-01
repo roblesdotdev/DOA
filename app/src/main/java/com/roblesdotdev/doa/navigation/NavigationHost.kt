@@ -18,20 +18,13 @@ fun NavigationHost(
     navController: NavHostController,
     startDestination: NavigationRoute,
 ) {
-    NavHost(navController = navController, startDestination = startDestination.route ) {
-       composable(NavigationRoute.Onboarding.route) {
-           val ctx = LocalContext.current
-           val sharedPreferences = ctx.getSharedPreferences("doa_app", Context.MODE_PRIVATE)
-           val repo = OnboardingRepositoryImpl(sharedPreferences)
-           val viewModel = OnboardingViewModel(
-               hasSeenOnboardingUseCase = HasSeenOnboardingUseCase(repo),
-               completeOnboardingUseCase = CompleteOnboardingUseCase(repo),
-           )
-           OnboardingScreen(viewModel) {
-               navController.popBackStack()
-               navController.navigate(NavigationRoute.Home.route)
-           }
-       }
+    NavHost(navController = navController, startDestination = startDestination.route) {
+        composable(NavigationRoute.Onboarding.route) {
+            OnboardingScreen(onFinish = {
+                navController.popBackStack()
+                navController.navigate(NavigationRoute.Home.route)
+            })
+        }
 
         composable(NavigationRoute.Home.route) {
             Text(text = "Home screen")
