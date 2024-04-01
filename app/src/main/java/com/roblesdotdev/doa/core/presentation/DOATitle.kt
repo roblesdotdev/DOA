@@ -13,6 +13,7 @@ fun DOATitle(
     text: String,
 ) {
     Text(
+        modifier = modifier,
         text = text.uppercase(),
         style = MaterialTheme.typography.headlineSmall.copy(
             fontWeight = FontWeight.Bold,

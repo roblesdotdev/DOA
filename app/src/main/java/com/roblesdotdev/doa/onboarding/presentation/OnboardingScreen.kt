@@ -9,17 +9,17 @@ fun OnboardingScreen(onFinish: () -> Unit) {
     val pages = listOf(
         OnboardingPage(
             title = "Welcome to monumental habits",
-            subtitle = "We can help you to be a better version on yourselve",
+            subtitle = "We can help you to be a better version on yourself",
             image = R.drawable.onboarding1,
         ),
         OnboardingPage(
             title = "Create new habits easily",
-            subtitle = "We can help you to be a better version on yourselve",
+            subtitle = "We can help you to be a better version on yourself",
             image = R.drawable.onboarding2,
         ),
         OnboardingPage(
             title = "Keep track of your progress",
-            subtitle = "We can help you to be a better version on yourselve",
+            subtitle = "We can help you to be a better version on yourself",
             image = R.drawable.onboarding3,
         )
     )
