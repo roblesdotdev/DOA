@@ -3,7 +3,6 @@ package com.roblesdotdev.doa.authentication.presentation.login.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.onConsumedWindowInsetsChanged
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -26,11 +25,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.roblesdotdev.doa.authentication.presentation.login.LoginEvent
+import com.roblesdotdev.doa.authentication.presentation.login.LoginUIState
 import com.roblesdotdev.doa.core.presentation.DOAButton
 import com.roblesdotdev.doa.core.presentation.DOATextField
 
 @Composable
-fun LoginForm(modifier: Modifier = Modifier) {
+fun LoginForm(
+    modifier: Modifier = Modifier,
+    uiState: LoginUIState,
+    onEvent: (LoginEvent) -> Unit,
+) {
     Column(
         modifier = modifier
             .background(Color.White, shape = RoundedCornerShape(20.dp))
@@ -45,8 +50,8 @@ fun LoginForm(modifier: Modifier = Modifier) {
             color = MaterialTheme.colorScheme.tertiary,
         )
         DOATextField(
-            value = "",
-            onValueChange = {},
+            value = uiState.email,
+            onValueChange = { onEvent(LoginEvent.EmailChange(it)) },
             placeholder = "Email",
             modifier = Modifier
                 .fillMaxWidth()
@@ -57,11 +62,13 @@ fun LoginForm(modifier: Modifier = Modifier) {
                 keyboardType = KeyboardType.Email,
                 imeAction = ImeAction.Next,
             ),
+            isEnabled = !uiState.isLoading,
+            errorMessage = uiState.emailError,
         )
 
         DOATextField(
-            value = "",
-            onValueChange = {},
+            value = uiState.password,
+            onValueChange = { onEvent(LoginEvent.PasswordChange(it)) },
             isPassword = true,
             modifier = Modifier
                 .fillMaxWidth()
@@ -71,12 +78,21 @@ fun LoginForm(modifier: Modifier = Modifier) {
                 autoCorrect = false,
                 keyboardType = KeyboardType.Password,
                 imeAction = ImeAction.Done,
-            )
+            ),
+            keyboardActions = KeyboardActions(onDone = { onEvent(LoginEvent.Login) }),
+            isEnabled = !uiState.isLoading,
+            errorMessage = uiState.passwordError,
         )
 
-        DOAButton(text = "Login", onClick = {})
+        DOAButton(
+            text = "Login",
+            onClick = { onEvent(LoginEvent.Login) },
+            isLoading = uiState.isLoading
+        )
 
-        TextButton(onClick = { }) {
+        TextButton(
+            enabled = !uiState.isLoading,
+            onClick = { }) {
             Text(
                 text = "Forgot password?",
                 color = MaterialTheme.colorScheme.tertiary,
@@ -84,7 +100,10 @@ fun LoginForm(modifier: Modifier = Modifier) {
             )
         }
 
-        TextButton(onClick = {}) {
+        TextButton(
+            onClick = { onEvent(LoginEvent.SignUp) },
+            enabled = !uiState.isLoading
+        ) {
             Text(
                 text = buildAnnotatedString {
                     append("Don't have an account?")

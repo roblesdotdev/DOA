@@ -18,21 +18,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.roblesdotdev.doa.R
 import com.roblesdotdev.doa.authentication.presentation.login.components.LoginForm
 import com.roblesdotdev.doa.core.presentation.DOATitle
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.loginbg),
             contentDescription = null,
             contentScale = ContentScale.FillWidth,
-            modifier = Modifier.aspectRatio(1f).graphicsLayer(
-                scaleX = 1.2f,
-                scaleY = 1.2f,
-            )
+            modifier = Modifier
+                .aspectRatio(1f)
+                .graphicsLayer(
+                    scaleX = 1.2f,
+                    scaleY = 1.2f,
+                )
         )
         Spacer(
             modifier = Modifier
@@ -61,7 +64,7 @@ fun LoginScreen() {
                 DOATitle(text = "Welcome to")
                 DOATitle(text = "Monumental Habits")
             }
-            LoginForm()
+            LoginForm(uiState = viewModel.uiState, onEvent = { viewModel.onEvent(it) })
         }
     }
 }
