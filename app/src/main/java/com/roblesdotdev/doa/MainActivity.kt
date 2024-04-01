@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
 
     private fun getStartDestination(hasSeenOnboarding: Boolean): NavigationRoute {
         return if (hasSeenOnboarding) {
-            NavigationRoute.Home
+            NavigationRoute.Login
         } else {
             NavigationRoute.Onboarding
         }
