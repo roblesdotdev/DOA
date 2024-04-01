@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-kapt")
     alias(libs.plugins.daggerHiltAndroid)
+    alias(libs.plugins.googleServices)
 }
 
 android {
@@ -71,6 +72,9 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     kapt(libs.androidx.hilt.compiler)
 
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

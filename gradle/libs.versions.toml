@@ -13,6 +13,7 @@ hiltNavigationComposeVersion = "1.2.0"
 hiltWorkerVersion = "1.2.0"
 hiltVersion = "2.49"
 hiltCompilerVersion = "1.2.0"
+firebaseVersion = "32.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,9 +39,12 @@ hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", vers
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationComposeVersion" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltVersion" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", name = "firebase-bom", version.ref = "firebaseVersion" }
+firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 daggerHiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
+googleServices = { id = "com.google.gms.google-services", version = "4.4.1" }
 
