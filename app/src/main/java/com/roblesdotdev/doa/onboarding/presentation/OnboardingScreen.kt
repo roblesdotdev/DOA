@@ -1,11 +1,20 @@
 package com.roblesdotdev.doa.onboarding.presentation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import com.roblesdotdev.doa.R
 import com.roblesdotdev.doa.onboarding.presentation.components.OnboardingPager
 
 @Composable
-fun OnboardingScreen(onFinish: () -> Unit) {
+fun OnboardingScreen(
+    viewModel: OnboardingViewModel,
+    onFinish: () -> Unit
+) {
+    LaunchedEffect(key1 = viewModel.hasSeenOnboarding) {
+        if (viewModel.hasSeenOnboarding) {
+            onFinish()
+        }
+    }
     val pages = listOf(
         OnboardingPage(
             title = "Welcome to monumental habits",
@@ -24,5 +33,8 @@ fun OnboardingScreen(onFinish: () -> Unit) {
         )
     )
 
-    OnboardingPager(pages = pages, onFinish = onFinish)
+    OnboardingPager(pages = pages, onFinish = {
+        viewModel.completeOnboarding()
+        onFinish()
+    })
 }
