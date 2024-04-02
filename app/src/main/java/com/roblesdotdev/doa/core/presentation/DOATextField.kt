@@ -47,6 +47,7 @@ fun DOATextField(
     isEnabled: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
+    background: Color = MaterialTheme.colorScheme.background,
 ) {
     var hidePassword by remember {
         mutableStateOf(true)
@@ -84,8 +85,8 @@ fun DOATextField(
             colors = OutlinedTextFieldDefaults.colors(
                 focusedTextColor = MaterialTheme.colorScheme.primary,
                 unfocusedTextColor = MaterialTheme.colorScheme.primary,
-                focusedContainerColor = MaterialTheme.colorScheme.background,
-                unfocusedContainerColor = MaterialTheme.colorScheme.background,
+                focusedContainerColor = background,
+                unfocusedContainerColor = background,
                 focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
                 unfocusedLeadingIconColor = MaterialTheme.colorScheme.tertiary,
                 unfocusedPlaceholderColor = MaterialTheme.colorScheme.tertiary.copy(alpha = .5f),

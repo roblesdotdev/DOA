@@ -25,7 +25,11 @@ import com.roblesdotdev.doa.authentication.presentation.login.components.LoginFo
 import com.roblesdotdev.doa.core.presentation.DOATitle
 
 @Composable
-fun LoginScreen(onLoginSuccess: () -> Unit, viewModel: LoginViewModel = hiltViewModel()) {
+fun LoginScreen(
+    onLoginSuccess: () -> Unit,
+    onSignup: () -> Unit,
+    viewModel: LoginViewModel = hiltViewModel()
+) {
 
     LaunchedEffect(key1 = viewModel.uiState.isLoggedIn) {
         if (viewModel.uiState.isLoggedIn) {
@@ -72,7 +76,10 @@ fun LoginScreen(onLoginSuccess: () -> Unit, viewModel: LoginViewModel = hiltView
                 DOATitle(text = "Welcome to")
                 DOATitle(text = "Monumental Habits")
             }
-            LoginForm(uiState = viewModel.uiState, onEvent = { viewModel.onEvent(it) })
+            LoginForm(
+                uiState = viewModel.uiState,
+                onSignup = onSignup,
+                onEvent = { viewModel.onEvent(it) })
         }
     }
 }

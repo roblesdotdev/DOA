@@ -34,6 +34,7 @@ import com.roblesdotdev.doa.core.presentation.DOATextField
 fun LoginForm(
     modifier: Modifier = Modifier,
     uiState: LoginUIState,
+    onSignup: () -> Unit,
     onEvent: (LoginEvent) -> Unit,
 ) {
     Column(
@@ -101,7 +102,7 @@ fun LoginForm(
         }
 
         TextButton(
-            onClick = { onEvent(LoginEvent.SignUp) },
+            onClick = { onSignup() },
             enabled = !uiState.isLoading
         ) {
             Text(

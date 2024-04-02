@@ -37,12 +37,6 @@ class LoginViewModel @Inject constructor(
                     password = event.password
                 )
             }
-
-            LoginEvent.SignUp -> {
-                uiState = uiState.copy(
-                    signUp = true
-                )
-            }
         }
     }
 

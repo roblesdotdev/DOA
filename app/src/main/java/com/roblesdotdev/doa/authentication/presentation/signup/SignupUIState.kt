@@ -1,10 +1,9 @@
-package com.roblesdotdev.doa.authentication.presentation.login
+package com.roblesdotdev.doa.authentication.presentation.signup
 
-data class LoginUIState(
+data class SignupUIState(
     val email: String = "",
     val password: String = "",
     val emailError: String? = null,
     val passwordError: String? = null,
-    val isLoggedIn: Boolean = false,
     val isLoading: Boolean = false,
 )
