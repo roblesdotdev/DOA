@@ -4,6 +4,7 @@ import com.roblesdotdev.doa.authentication.data.matcher.EmailMatcherImpl
 import com.roblesdotdev.doa.authentication.data.repository.AuthenticationRepositoryImpl
 import com.roblesdotdev.doa.authentication.domain.matcher.EmailMatcher
 import com.roblesdotdev.doa.authentication.domain.repository.AuthenticationRepository
+import com.roblesdotdev.doa.authentication.domain.usecase.CheckSessionUseCase
 import com.roblesdotdev.doa.authentication.domain.usecase.LoginUseCases
 import com.roblesdotdev.doa.authentication.domain.usecase.LoginWithCredentialsUseCase
 import com.roblesdotdev.doa.authentication.domain.usecase.ValidateEmailUseCase
@@ -38,5 +39,11 @@ object AuthenticationModule {
             ValidateEmailUseCase(matcher),
             ValidatePasswordUseCase(),
         )
+    }
+
+    @Provides
+    @Singleton
+    fun providesCheckSessionUseCase(repository: AuthenticationRepository): CheckSessionUseCase {
+        return CheckSessionUseCase(repository)
     }
 }

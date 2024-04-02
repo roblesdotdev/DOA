@@ -21,15 +21,15 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavigationHost(
                     navController = navController,
-                    startDestination = getStartDestination(viewModel.hasSeenOnboarding)
+                    startDestination = getStartDestination()
                 )
             }
         }
     }
 
-    private fun getStartDestination(hasSeenOnboarding: Boolean): NavigationRoute {
-        return if (hasSeenOnboarding) {
-            NavigationRoute.Login
+    private fun getStartDestination(): NavigationRoute {
+        return if (viewModel.hasSeenOnboarding) {
+            if (viewModel.hasSession) NavigationRoute.Home else NavigationRoute.Login
         } else {
             NavigationRoute.Onboarding
         }

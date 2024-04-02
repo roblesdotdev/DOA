@@ -14,4 +14,8 @@ class AuthenticationRepositoryImpl : AuthenticationRepository {
            Result.failure(e)
         }
     }
+
+    override fun hasSession(): Boolean {
+        return Firebase.auth.currentUser != null
+    }
 }
