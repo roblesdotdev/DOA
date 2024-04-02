@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -24,7 +25,14 @@ import com.roblesdotdev.doa.authentication.presentation.login.components.LoginFo
 import com.roblesdotdev.doa.core.presentation.DOATitle
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
+fun LoginScreen(onLoginSuccess: () -> Unit, viewModel: LoginViewModel = hiltViewModel()) {
+
+    LaunchedEffect(key1 = viewModel.uiState.isLoggedIn) {
+        if (viewModel.uiState.isLoggedIn) {
+            onLoginSuccess()
+        }
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.loginbg),
