@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.roblesdotdev.doa.authentication.presentation.login.LoginScreen
 import com.roblesdotdev.doa.authentication.presentation.signup.SignupScreen
+import com.roblesdotdev.doa.habits.presentation.home.HomeScreen
 import com.roblesdotdev.doa.onboarding.presentation.OnboardingScreen
 
 @Composable
@@ -41,7 +42,7 @@ fun NavigationHost(
         }
 
         composable(NavigationRoute.Home.route) {
-            Text(text = "Home screen")
+            HomeScreen()
         }
     }
 }
