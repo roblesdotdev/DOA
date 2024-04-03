@@ -34,6 +34,9 @@ fun NavigationHost(
         composable(NavigationRoute.Signup.route) {
             SignupScreen(onLogin = {
                 navController.popBackStack()
+            }, onSignIn = {
+                navController.popBackStack()
+                navController.navigate(NavigationRoute.Home.route)
             })
         }
 

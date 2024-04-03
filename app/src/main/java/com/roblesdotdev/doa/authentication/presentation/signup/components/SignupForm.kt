@@ -73,7 +73,7 @@ fun SignupForm(
                 keyboardType = KeyboardType.Password,
             ),
             keyboardActions = KeyboardActions(onDone = {
-
+                onEvent(SignupEvent.Signup)
             })
         )
         Spacer(modifier = Modifier.height(16.dp))

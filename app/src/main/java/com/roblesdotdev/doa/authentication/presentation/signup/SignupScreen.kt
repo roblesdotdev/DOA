@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -17,7 +18,18 @@ import com.roblesdotdev.doa.authentication.presentation.signup.components.Signup
 import com.roblesdotdev.doa.ui.theme.DOATheme
 
 @Composable
-fun SignupScreen(onLogin: () -> Unit, viewModel: SignupViewModel = hiltViewModel()) {
+fun SignupScreen(
+    onLogin: () -> Unit,
+    onSignIn: () -> Unit,
+    viewModel: SignupViewModel = hiltViewModel()
+) {
+
+    LaunchedEffect(key1 = viewModel.uiState.isSignedIn) {
+        if (viewModel.uiState.isSignedIn) {
+            onSignIn()
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -41,6 +53,6 @@ fun SignupScreen(onLogin: () -> Unit, viewModel: SignupViewModel = hiltViewModel
 @Composable
 private fun SignupScreenPreview() {
     DOATheme {
-        SignupScreen(onLogin = {})
+        SignupScreen(onLogin = {}, onSignIn = {})
     }
 }

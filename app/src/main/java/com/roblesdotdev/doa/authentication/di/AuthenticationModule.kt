@@ -7,6 +7,8 @@ import com.roblesdotdev.doa.authentication.domain.repository.AuthenticationRepos
 import com.roblesdotdev.doa.authentication.domain.usecase.CheckSessionUseCase
 import com.roblesdotdev.doa.authentication.domain.usecase.LoginUseCases
 import com.roblesdotdev.doa.authentication.domain.usecase.LoginWithCredentialsUseCase
+import com.roblesdotdev.doa.authentication.domain.usecase.SignupUseCases
+import com.roblesdotdev.doa.authentication.domain.usecase.SignupWithCredentialsUseCase
 import com.roblesdotdev.doa.authentication.domain.usecase.ValidateEmailUseCase
 import com.roblesdotdev.doa.authentication.domain.usecase.ValidatePasswordUseCase
 import dagger.Module
@@ -40,6 +42,17 @@ object AuthenticationModule {
             ValidatePasswordUseCase(),
         )
     }
+
+    @Provides
+    @Singleton
+    fun providesSignupUseCases(repository: AuthenticationRepository, matcher: EmailMatcher): SignupUseCases {
+        return SignupUseCases(
+            SignupWithCredentialsUseCase(repository),
+            ValidateEmailUseCase(matcher),
+            ValidatePasswordUseCase(),
+        )
+    }
+
 
     @Provides
     @Singleton
