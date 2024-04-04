@@ -17,11 +17,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.roblesdotdev.doa.core.presentation.DOACheckbox
+import com.roblesdotdev.doa.habits.domain.model.Habit
 
 @Composable
 fun HomeListItem(
     modifier: Modifier = Modifier,
-    habit: String,
+    habit: Habit,
     onCheckedChange: () -> Unit,
     onHabitClick: () -> Unit
 ) {
@@ -35,7 +36,7 @@ fun HomeListItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = habit, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+        Text(text = habit.name, fontWeight = FontWeight.Bold, fontSize = 14.sp)
         DOACheckbox(isChecked = true, onCheckedChange = onCheckedChange)
     }
 }

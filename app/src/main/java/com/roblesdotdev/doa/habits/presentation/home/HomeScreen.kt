@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -25,13 +26,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.roblesdotdev.doa.habits.presentation.home.components.HomeDateSelector
 import com.roblesdotdev.doa.habits.presentation.home.components.HomeListItem
 import com.roblesdotdev.doa.habits.presentation.home.components.HomeQuote
 
 @Composable
-fun HomeScreen() {
-    val habitList: List<String> = listOf("habit 1", "habit 2", "habit 3")
+fun HomeScreen(
+    viewModel: HomeViewModel = hiltViewModel()
+) {
+    val uiState = viewModel.uiState
     Scaffold(
         topBar = { TopAppBar() },
         floatingActionButton = { FloatingButton() },
@@ -65,12 +69,19 @@ fun HomeScreen() {
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.tertiary,
                     )
-                    HomeDateSelector(onDateTimeClick = {})
+                    HomeDateSelector(
+                        selectedDate = uiState.selectedDate,
+                        mainData = uiState.currentDate,
+                        onDateTimeClick = { viewModel.onEvent(HomeEvent.ChangeDate(it)) }
+                    )
                 }
             }
 
-            items(habitList.size) {
-                HomeListItem(habit = habitList[it], onCheckedChange = {}, onHabitClick = {})
+            items(uiState.habits) { habit ->
+                HomeListItem(
+                    habit = habit,
+                    onCheckedChange = { viewModel.onEvent(HomeEvent.CompleteHabit(habit)) },
+                    onHabitClick = {})
             }
         }
     }
