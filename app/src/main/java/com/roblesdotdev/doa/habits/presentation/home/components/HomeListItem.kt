@@ -18,11 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.roblesdotdev.doa.core.presentation.DOACheckbox
 import com.roblesdotdev.doa.habits.domain.model.Habit
+import java.time.LocalDate
 
 @Composable
 fun HomeListItem(
     modifier: Modifier = Modifier,
     habit: Habit,
+    selectedDate: LocalDate,
     onCheckedChange: () -> Unit,
     onHabitClick: () -> Unit
 ) {
@@ -37,6 +39,9 @@ fun HomeListItem(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = habit.name, fontWeight = FontWeight.Bold, fontSize = 14.sp)
-        DOACheckbox(isChecked = true, onCheckedChange = onCheckedChange)
+        DOACheckbox(
+            isChecked = habit.completedDates.contains(selectedDate),
+            onCheckedChange = onCheckedChange
+        )
     }
 }

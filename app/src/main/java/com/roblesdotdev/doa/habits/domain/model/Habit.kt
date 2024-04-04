@@ -13,14 +13,3 @@ data class Habit(
     val reminder: LocalTime,
     val startDate: ZonedDateTime,
 )
-
-val mockHabits = (1..15).map {
-    Habit(
-        id = "$it",
-        name = "Habit $it",
-        frequency = emptyList(),
-        completedDates = emptyList(),
-        reminder = LocalTime.MAX,
-        startDate = ZonedDateTime.now()
-    )
-}

@@ -81,6 +81,7 @@ fun HomeScreen(
                 HomeListItem(
                     habit = habit,
                     onCheckedChange = { viewModel.onEvent(HomeEvent.CompleteHabit(habit)) },
+                    selectedDate = uiState.selectedDate.toLocalDate(),
                     onHabitClick = {})
             }
         }
