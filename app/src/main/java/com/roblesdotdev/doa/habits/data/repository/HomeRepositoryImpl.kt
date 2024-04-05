@@ -30,7 +30,15 @@ class HomeRepositoryImpl: HomeRepository {
 
     override suspend fun insertHabit(habit: Habit) {
         val idx = mockHabits.indexOfFirst { it.id == habit.id }
-        mockHabits.removeAt(idx)
-        mockHabits.add(idx, habit)
+        if (idx == -1) {
+            mockHabits.add(habit)
+        } else {
+            mockHabits.removeAt(idx)
+            mockHabits.add(idx, habit)
+        }
+    }
+
+    override suspend fun getHabitById(id: String): Habit {
+        return mockHabits.first { it.id == id }
     }
 }

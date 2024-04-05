@@ -34,6 +34,7 @@ import com.roblesdotdev.doa.habits.presentation.home.components.HomeQuote
 @Composable
 fun HomeScreen(
     onCreateAction: () -> Unit,
+    onEditHabit: (String) -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.uiState
@@ -83,7 +84,7 @@ fun HomeScreen(
                     habit = habit,
                     onCheckedChange = { viewModel.onEvent(HomeEvent.CompleteHabit(habit)) },
                     selectedDate = uiState.selectedDate.toLocalDate(),
-                    onHabitClick = {})
+                    onHabitClick = { onEditHabit(habit.id) })
             }
         }
     }

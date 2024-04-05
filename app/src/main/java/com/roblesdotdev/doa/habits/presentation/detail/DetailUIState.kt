@@ -13,4 +13,5 @@ data class DetailUIState(
     val completedDates: List<LocalDate> = emptyList(),
     val startDate: ZonedDateTime = ZonedDateTime.now(),
     val isSaved: Boolean = false,
+    val isLoading: Boolean = false,
 )

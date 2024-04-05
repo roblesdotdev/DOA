@@ -94,7 +94,9 @@ fun DetailScreen(
             Spacer(modifier = Modifier.weight(1f))
             DOAButton(
                 text = "Save Habit",
+                isLoading = uiState.isLoading,
                 onClick = {
+                    viewModel.onEvent(DetailEvent.HabitSave)
                 }
             )
         }
