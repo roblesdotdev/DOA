@@ -33,12 +33,13 @@ import com.roblesdotdev.doa.habits.presentation.home.components.HomeQuote
 
 @Composable
 fun HomeScreen(
+    onCreateAction: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.uiState
     Scaffold(
         topBar = { TopAppBar() },
-        floatingActionButton = { FloatingButton() },
+        floatingActionButton = { FloatingButton(onClick = onCreateAction) },
         modifier = Modifier.fillMaxSize(),
     ) { paddingValues ->
         LazyColumn(
@@ -102,9 +103,11 @@ fun TopAppBar() {
 }
 
 @Composable
-fun FloatingButton() {
+fun FloatingButton(
+    onClick: () -> Unit,
+) {
     FloatingActionButton(
-        onClick = {},
+        onClick = onClick,
         containerColor = MaterialTheme.colorScheme.primary,
         shape = CircleShape,
     ) {

@@ -76,6 +76,10 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
 
+    // Time picker
+    implementation(libs.dialog.core)
+    implementation(libs.dialog.clock)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

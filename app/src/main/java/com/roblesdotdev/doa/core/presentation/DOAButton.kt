@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,6 +24,7 @@ import com.roblesdotdev.doa.ui.theme.DOATheme
 @Composable
 fun DOAButton(
     modifier: Modifier = Modifier,
+    colors: ButtonColors = ButtonDefaults.buttonColors(),
     text: String,
     isLoading: Boolean = false,
     onClick: () -> Unit,
@@ -33,6 +36,7 @@ fun DOAButton(
             .height(48.dp),
         shape = RoundedCornerShape(8.dp),
         enabled = !isLoading,
+        colors = colors,
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,

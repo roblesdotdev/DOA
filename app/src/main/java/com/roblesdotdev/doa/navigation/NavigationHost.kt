@@ -1,12 +1,12 @@
 package com.roblesdotdev.doa.navigation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.roblesdotdev.doa.authentication.presentation.login.LoginScreen
 import com.roblesdotdev.doa.authentication.presentation.signup.SignupScreen
+import com.roblesdotdev.doa.habits.presentation.detail.DetailScreen
 import com.roblesdotdev.doa.habits.presentation.home.HomeScreen
 import com.roblesdotdev.doa.onboarding.presentation.OnboardingScreen
 
@@ -42,7 +42,13 @@ fun NavigationHost(
         }
 
         composable(NavigationRoute.Home.route) {
-            HomeScreen()
+            HomeScreen(onCreateAction = {
+                navController.navigate(NavigationRoute.Detail.route)
+            })
+        }
+
+        composable(NavigationRoute.Detail.route) {
+            DetailScreen(onBack = { navController.popBackStack() })
         }
     }
 }

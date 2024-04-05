@@ -14,6 +14,7 @@ hiltWorkerVersion = "1.2.0"
 hiltVersion = "2.49"
 hiltCompilerVersion = "1.2.0"
 firebaseVersion = "32.8.0"
+timePicker = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,6 +42,8 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", name = "firebase-bom", version.ref = "firebaseVersion" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+dialog-clock = { module = "com.maxkeppeler.sheets-compose-dialogs:clock", version.ref = "timePicker" }
+dialog-core = { module = "com.maxkeppeler.sheets-compose-dialogs:core", version.ref = "timePicker" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
