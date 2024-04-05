@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.roblesdotdev.doa.ui.theme.DOATheme
@@ -36,7 +37,8 @@ fun DetailFrequency(
         Text(
             text = "Frequency",
             modifier = Modifier.padding(16.dp),
-            color = MaterialTheme.colorScheme.tertiary
+            color = MaterialTheme.colorScheme.tertiary,
+            fontWeight = FontWeight.Bold,
         )
         Row(
             modifier = Modifier
