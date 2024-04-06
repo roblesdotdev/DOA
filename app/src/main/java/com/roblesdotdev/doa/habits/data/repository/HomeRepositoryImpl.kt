@@ -1,44 +1,29 @@
 package com.roblesdotdev.doa.habits.data.repository
 
+import com.roblesdotdev.doa.habits.data.extension.toStartOfDateTimestamp
+import com.roblesdotdev.doa.habits.data.local.HomeDao
+import com.roblesdotdev.doa.habits.data.local.entity.HabitEntity
+import com.roblesdotdev.doa.habits.data.mapper.toDomain
+import com.roblesdotdev.doa.habits.data.mapper.toEntity
 import com.roblesdotdev.doa.habits.domain.model.Habit
 import com.roblesdotdev.doa.habits.domain.repository.HomeRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
-import java.time.LocalDate
-import java.time.LocalTime
+import kotlinx.coroutines.flow.map
 import java.time.ZonedDateTime
 
-class HomeRepositoryImpl: HomeRepository {
-    private val mockHabits = (1..10).map {
-        val dates = mutableListOf<LocalDate>()
-        if (it % 2 == 0) {
-            dates.add(LocalDate.now())
-        }
-        Habit(
-            id = "$it",
-            name = "Habit $it",
-            frequency = emptyList(),
-            completedDates = dates,
-            reminder = LocalTime.now(),
-            startDate = ZonedDateTime.now()
-        )
-    }.toMutableList()
-
+class HomeRepositoryImpl(
+    private val dao: HomeDao
+) : HomeRepository {
     override fun getAllHabitsForSelectedDate(date: ZonedDateTime): Flow<List<Habit>> {
-        return flowOf(mockHabits)
+        return dao.getAllHabitsForSelectedDate(date.toStartOfDateTimestamp())
+            .map { it.map(HabitEntity::toDomain) }
     }
 
     override suspend fun insertHabit(habit: Habit) {
-        val idx = mockHabits.indexOfFirst { it.id == habit.id }
-        if (idx == -1) {
-            mockHabits.add(habit)
-        } else {
-            mockHabits.removeAt(idx)
-            mockHabits.add(idx, habit)
-        }
+        dao.insertHabit(habit.toEntity())
     }
 
     override suspend fun getHabitById(id: String): Habit {
-        return mockHabits.first { it.id == id }
+        return dao.getHabitById(id).toDomain()
     }
 }

@@ -18,6 +18,6 @@ class CompleteHabitUseCase(
                 completedDates = habit.completedDates + date.toLocalDate()
             )
         }
-        repo.insertHabit(newHabit.copy(name = "Edited habit"))
+        repo.insertHabit(newHabit)
     }
 }
