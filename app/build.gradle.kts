@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("kotlin-kapt")
     alias(libs.plugins.daggerHiltAndroid)
     alias(libs.plugins.googleServices)
+    alias(libs.plugins.googleDevtoolsKsp)
 }
 
 android {
@@ -68,9 +68,9 @@ dependencies {
 
     // Dagger Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
-    kapt(libs.androidx.hilt.compiler)
+    ksp(libs.androidx.hilt.compiler)
 
     // Firebase
     implementation(platform(libs.firebase.bom))
@@ -79,6 +79,11 @@ dependencies {
     // Time picker
     implementation(libs.dialog.core)
     implementation(libs.dialog.clock)
+
+    // Room
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
